@@ -38,8 +38,16 @@ export default class Plugin {
       : camel2DashComponentName;
     this.camel2UnderlineComponentName = camel2UnderlineComponentName;
     this.style = style || false;
+    if (typeof this.style === 'string' &&
+        (this.style.indexOf('function') >= 0 || this.style.indexOf('=>') > 0)) {
+      this.style = eval(this.style);
+    }
     this.fileName = fileName || '';
     this.customName = customName;
+    if (typeof this.customName === 'string' &&
+        (this.customName.indexOf('function') >= 0 || this.customName.indexOf('=>') > 0)) {
+      this.customName = eval(this.customName);
+    }
     this.types = types;
   }
 
